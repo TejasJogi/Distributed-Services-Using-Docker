@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, redirect, url_for
+from flask import Flask, request, redirect, url_for, send_from_directory
 from werkzeug.utils import secure_filename
 
 UPLOAD_FOLDER = './Upload'
@@ -27,7 +27,7 @@ def index():
     """ % "<br>".join(os.listdir(app.config['UPLOAD_FOLDER'],))
         
 @app.route('/download/<path:path>', methods=['GET', 'POST'])
-def get_files(path):
+def forward(path):
     try:
         return send_from_directory(UPLOAD_FOLDER, path, as_attachment=True)
     except FileNotFoundError:
@@ -35,4 +35,4 @@ def get_files(path):
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host='0.0.0.0', port='9090', debug=True)
