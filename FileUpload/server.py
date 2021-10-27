@@ -24,7 +24,7 @@ def index():
          <input type=submit value=Upload>
     </form>
     <p>%s</p>
-    """ % "<br>".join(os.listdir(app.config['UPLOAD_FOLDER'],))
+    """ % "<br>".join(os.listdir(app.config['UPLOAD_FOLDER']))
         
 @app.route('/download/<path:path>', methods=['GET', 'POST'])
 def forward(path):
@@ -35,4 +35,4 @@ def forward(path):
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port='9090', debug=True)
+    app.run(host='0.0.0.0', port='5050', debug=True)
